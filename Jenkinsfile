@@ -3,4 +3,3 @@
 env.COMPONENT="frontend"
 env.APPTYPE="nodejs"
 ciPipeline()
-
