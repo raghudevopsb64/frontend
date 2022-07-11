@@ -1,0 +1,23 @@
+trigger:
+#  branches:
+#    include: [ "*" ]
+  tags:
+    include: [ "*" ]
+
+
+pool:
+  name: 'B64'
+
+steps:
+  - script: |
+      docker build -t 739561048503.dkr.ecr.us-east-1.amazonaws.com/frontend:latest .
+    displayName: Docker Build
+
+  - script: |
+      aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 739561048503.dkr.ecr.us-east-1.amazonaws.com
+      docker tag 739561048503.dkr.ecr.us-east-1.amazonaws.com/frontend:latest 739561048503.dkr.ecr.us-east-1.amazonaws.com/frontend:${BUILD_SOURCEBRANCHNAME}
+      docker push 739561048503.dkr.ecr.us-east-1.amazonaws.com/frontend:${BUILD_SOURCEBRANCHNAME}
+    displayName: Push Docker Image
+    condition: contains(variables['Build.SourceBranch'], 'refs/tags')
+
+
