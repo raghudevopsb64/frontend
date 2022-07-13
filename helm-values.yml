@@ -1,0 +1,14 @@
+component:
+  name: frontend
+  version: 4.0.0
+configMap:
+  create: no
+service:
+  containerPort: 80
+resources:
+  limits:
+    cpu: 750m
+    memory: 750Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
