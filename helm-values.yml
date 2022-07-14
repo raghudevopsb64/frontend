@@ -5,6 +5,7 @@ configMap:
   create: no
 service:
   containerPort: 80
+  healthURL: "/nginx_status"
 resources:
   limits:
     cpu: 750m
